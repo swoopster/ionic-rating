@@ -2,7 +2,7 @@
 (function() {
   angular.module('ionic.rating', []).constant('ratingConfig', {
     max: 5
-  }).controller('RatingController', function($scope, $attrs, ratingConfig) {
+  }).controller('RatingController', ['$scope', '$attrs', 'ratingConfig', function($scope, $attrs, ratingConfig) {
     var ngModelCtrl;
     ngModelCtrl = {
       $setViewValue: angular.noop
@@ -47,7 +47,8 @@
       return $scope.value = ngModelCtrl.$viewValue;
     };
     return this;
-  }).directive('rating', function($timeout) {
+  }]).directive('rating',
+  ['$timeout', function($timeout) {
     return {
       restrict: 'EA',
       require: ['rating', 'ngModel'],
@@ -68,6 +69,6 @@
         }
       }
     };
-  });
+  }]);
 
 }).call(this);
